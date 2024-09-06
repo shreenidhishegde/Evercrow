@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Evercrow - Bird Name Count Results</title>
+</head>
+<body>
+    <h1>Bird Name Count Results</h1>
+    <ul>
+    {% for bird, count in bird_counts.items %}
+        <li>{{ bird|capfirst }}: {{ count }}</li>
+    {% endfor %}
+    </ul>
+    <a href="{% url 'count_bird_names' %}">Upload another PDF</a>
+</body>
+</html>
