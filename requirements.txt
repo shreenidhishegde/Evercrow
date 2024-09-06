@@ -9,3 +9,5 @@ pypdf2==3.0.1
 pytesseract==0.3.13
 sqlparse==0.5.1
 typing-extensions==4.12.2
+django-storages
+boto3
