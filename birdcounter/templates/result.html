@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     <title>Evercrow - Bird Name Count Results</title>
@@ -11,5 +11,122 @@
     {% endfor %}
     </ul>
     <a href="{% url 'count_bird_names' %}">Upload another PDF</a>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evercrow - Bird Name Count Results</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .results-container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        .bird-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .bird-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+            transition: background-color 0.3s ease;
+        }
+        .bird-item:last-child {
+            border-bottom: none;
+        }
+        .bird-item:hover {
+            background-color: #f8f8f8;
+        }
+        .bird-name {
+            font-weight: bold;
+            color: #3498db;
+        }
+        .bird-count {
+            background-color: #3498db;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.9em;
+        }
+        .upload-button {
+            display: block;
+            width: 200px;
+            margin: 20px auto;
+            padding: 10px;
+            background-color: #2ecc71;
+            color: white;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .upload-button:hover {
+            background-color: #27ae60;
+        }
+        @media (max-width: 600px) {
+            body {
+                padding: 10px;
+            }
+            .bird-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .bird-count {
+                margin-top: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Bird Name Count Results</h1>
+    <div class="results-container">
+        <ul class="bird-list">
+        {% for bird, count in bird_counts.items %}
+            <li class="bird-item">
+                <span class="bird-name">{{ bird|capfirst }}</span>
+                <span class="bird-count">{{ count }}</span>
+            </li>
+        {% endfor %}
+        </ul>
+    </div>
+    <a href="{% url 'count_bird_names' %}" class="upload-button">Upload another PDF</a>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const birdItems = document.querySelectorAll('.bird-item');
+            birdItems.forEach(item => {
+                item.addEventListener('mouseover', function() {
+                    this.style.transform = 'translateX(10px)';
+                });
+                item.addEventListener('mouseout', function() {
+                    this.style.transform = 'translateX(0)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
