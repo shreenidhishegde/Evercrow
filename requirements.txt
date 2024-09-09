@@ -19,10 +19,11 @@ packaging==24.1
 pdf2image==1.17.0
 pillow==10.4.0
 prompt_toolkit==3.0.47
+psycopg2-binary==2.9.3
+python-dotenv==0.19.1
 PyPDF2==3.0.1
 pytesseract==0.3.13
 python-dateutil==2.9.0.post0
-python-dotenv==1.0.1
 redis==5.0.8
 s3transfer==0.10.2
 six==1.16.0
