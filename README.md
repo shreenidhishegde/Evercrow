@@ -12,7 +12,6 @@ and maintains a history of uploaded documents.
 - **Database**: SQLite (for development), PostgreSQL (for production)
 - **PDF Processing**: PyPDF2 for text extraction
 - **OCR (Optical Character Recognition)**: Tesseract OCR via pytesseract
-- **Image Processing**: Pillow (PIL) for image manipulation
 - **Deployment**: Render (cloud platform)
 
 ## Key Features
@@ -32,7 +31,7 @@ and maintains a history of uploaded documents.
 - Amazon S3 Setup and give the credentials in .env file
 
 ### Clone the Repository
+git clone https://github.com/shreenidhishegde/Evercrow.git
 
-```bash
-git clone https://github.com/yourusername/bird-count-pdf-analyzer.git
-cd bird-count-pdf-analyzer
+### Starting the project
+python manage.py runserver
