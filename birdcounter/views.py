@@ -92,7 +92,7 @@ def upload_and_count_birds(request):
         # Check file size
         if pdf_file.size > MAX_UPLOAD_SIZE:
             return render(request, 'error.html', {
-                'error': f'File is too large. Please upload a file smaller than 3 MB.'
+                'error': f'File is too large. Please upload a file smaller than 4 MB.'
             })
 
     pdf_file = request.FILES['pdf_file']
@@ -156,72 +156,6 @@ def save_document_and_counts(user, file_name, original_name, bird_counts):
     ])
     return document
 
-
-
-
-# def upload_and_count_birds(request):
-#     if request.method == 'POST' and request.FILES['pdf_file']:
-#         pdf_file = request.FILES['pdf_file']
-
-#         # Generate a unique file name
-#         timestamp = datetime.now().strftime("%Y%m%d%H%M%S")
-#         unique_id = str(uuid.uuid4())[:8]
-#         file_name = f'pdfs/{request.user.username}/{timestamp}_{unique_id}_{pdf_file.name}'
-
-#         try:
-#             file_content = pdf_file.read()
-
-#             if settings.ON_RENDER:
-#                 session = boto3.Session(
-#                     aws_access_key_id=settings.AWS_ACCESS_KEY_ID,
-#                     aws_secret_access_key=settings.AWS_SECRET_ACCESS_KEY,
-#                     region_name=settings.AWS_S3_REGION_NAME
-#                 )
-#                 s3 = session.client('s3', config=Config(signature_version='s3v4'),
-#                             use_ssl=True, verify=None)
-                
-#                 file_obj_upload = io.BytesIO(file_content)
-#                 s3.upload_fileobj(file_obj_upload, settings.AWS_STORAGE_BUCKET_NAME, file_name)
-#             else:
-#                 default_storage.save(file_name, ContentFile(file_content))
-
-#             file_obj_process = io.BytesIO(file_content)
-            
-#         except ClientError as e:
-#             print(f"An error occurred: {e}")
-#             return render(request, 'error.html', {'error': 'File upload failed'})
-        
-#         bird_names = BIRD_NAMES
-#         bird_counts = {bird: 0 for bird in bird_names}
-        
-#         try:
-#             pdf_reader = PdfReader(file_obj_process)
-   
-#             for page in pdf_reader.pages:
-#                 text = page.extract_text()
-#                 if not text:
-#                     image = convert_pdf_to_image(page)
-#                     text = pytesseract.image_to_string(image)
-                
-#                 for bird in bird_names:
-#                     bird_counts[bird] += text.lower().count(bird)
-            
-#             # Save the document and bird counts
-#             document = PDFDocument.objects.create(
-#                 user=request.user,
-#                 file=file_name,
-#                 title=pdf_file.name
-#             )
-#             for bird, count in bird_counts.items():
-#                 BirdCount.objects.create(document=document, bird_name=bird, count=count)
-            
-#         except ClientError as e:
-#             print(f"An error occurred: {e}")
-#             return render(request, 'error.html', {'error': 'File processing failed'})
-        
-#         return redirect('document_detail', document_id=document.id)
-    
-#     return render(request, 'upload.html')
 
 
 
