@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 import boto3
 import io
 import uuid
+from config import BIRD_NAMES
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
@@ -113,7 +114,7 @@ def upload_and_count_birds(request):
             print(f"An error occurred: {e}")
             return render(request, 'error.html', {'error': 'File upload failed'})
         
-        bird_names = ['crow', 'ostrich', 'eagle', 'sparrow', 'penguin']
+        bird_names = BIRD_NAMES
         bird_counts = {bird: 0 for bird in bird_names}
         
         try:
@@ -145,14 +146,6 @@ def upload_and_count_birds(request):
     
     return render(request, 'upload.html')
 
-
-
-
-
-
-def convert_pdf_to_image(pdf_path, page_number):
-    images = convert_from_path(pdf_path, first_page=page_number, last_page=page_number)
-    return images[0]
 
 
 
