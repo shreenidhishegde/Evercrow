@@ -90,10 +90,14 @@
     <div class="results-container">
         <ul class="bird-list">
         {% for bird, count in bird_counts.items %}
-            <li class="bird-item">
-                <span class="bird-name">{{ bird|capfirst }}</span>
-                <span class="bird-count">{{ count }}</span>
-            </li>
+            {% if count > 0 %}
+                <li class="bird-item">
+                    <span class="bird-name">{{ bird|capfirst }}</span>
+                    <span class="bird-count">{{ count }}</span>
+                </li>
+            {% endif %}
+        {% empty %}
+            <li>No birds found with non-zero counts.</li>
         {% endfor %}
         </ul>
     </div>
