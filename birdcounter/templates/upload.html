@@ -103,7 +103,7 @@
     <div class="nav-bar">
         <h1>Welcome, {{ user.username }}</h1>
         <div>
-            <a href="{% url 'document_list' %}" class="nav-link">My Documents</a>
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
             <a href="{% url 'logout' %}" class="nav-link">Logout</a>
         </div>
     </div>
@@ -116,7 +116,7 @@
                 <label for="pdf-file" class="file-input-label">Choose a PDF file</label>
             </div>
             <div class="file-name" id="file-name"></div>
-            <button type="submit" class="submit-button" id="submit-button" disabled>Upload and Count</button>
+            <button type="submit" class="submit-button" id="submit-button" disabled>Upload</button>
         </form>
     </div>
     <script>
