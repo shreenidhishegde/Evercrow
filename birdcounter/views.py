@@ -133,9 +133,6 @@ def process_pdf(file_obj):
     bird_counts = {bird: 0 for bird in bird_names}
     pdf_reader = PdfReader(file_obj)
 
-    if len(pdf_reader.pages) > MAX_PDF_PAGES:
-        raise ValueError(f"PDF exceeds maximum page limit of {MAX_PDF_PAGES}")
-
     for page in pdf_reader.pages:
         text = page.extract_text()
         if not text:

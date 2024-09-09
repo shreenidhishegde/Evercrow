@@ -17,4 +17,4 @@ BIRD_NAMES = [
     'woodpecker',
     'swan'
 ]
-MAX_UPLOAD_SIZE = 3 * 1024 * 1024  # 3 MB
+MAX_UPLOAD_SIZE = 4 * 1024 * 1024  # 3 MB
