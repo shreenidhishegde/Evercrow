@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evercrow - My Documents</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        h1, h2 {
+            color: #2c3e50;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .nav-link {
+            color: #3498db;
+            text-decoration: none;
+            margin-left: 15px;
+        }
+        .nav-link:hover {
+            text-decoration: underline;
+        }
+        .document-list {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .document-item {
+            border-bottom: 1px solid #eee;
+            padding: 10px 0;
+        }
+        .document-item:last-child {
+            border-bottom: none;
+        }
+        .upload-button {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+        .upload-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</head>
+<body>
+    <div class="nav-bar">
+        <h1>Welcome, {{ user.username }}</h1>
+        <div>
+            <a href="{% url 'home' %}" class="nav-link">Home</a>
+            <a href="{% url 'logout' %}" class="nav-link">Logout</a>
+        </div>
+    </div>
+    <h2>My Documents</h2>
+    <div class="document-list">
+        {% if documents %}
+            {% for document in documents %}
+                <div class="document-item">
+                    <h3>{{ document.title|default:"Untitled Document" }}</h3>
+                    <p>Uploaded on: {{ document.uploaded_at }}</p>
+                    <a href="{% url 'document_detail' document.id %}">View Details</a>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p>You haven't uploaded any documents yet.</p>
+        {% endif %}
+    </div>
+    <a href="{% url 'upload_document' %}" class="upload-button">Upload New Document</a>
+</body>
+</html>
