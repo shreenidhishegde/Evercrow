@@ -33,7 +33,7 @@ def home(request):
         else:
             return render(request, 'home.html', {'show_upload_prompt': True})
     else:
-        return render(request, 'home.html')
+        return render(request, 'home.html',{'documents': []})
     
 
 def signup(request):

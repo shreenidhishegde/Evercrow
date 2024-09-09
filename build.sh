@@ -1,13 +1,18 @@
 #!/usr/bin/env bash
 # exit on error
 set -o errexit
-# python -m pip install --upgrade pip
-# pip install wheel setuptools
 
+# Install dependencies
 pip install -r requirements.txt
 
-python manage.py collectstatic --no-input
+# Make migrations (in case there are new changes)
+python manage.py makemigrations
+
+# Apply migrations
 python manage.py migrate
+
+# Collect static files
+python manage.py collectstatic --no-input
 
 
 
