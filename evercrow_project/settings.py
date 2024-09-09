@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+
+LOGIN_REDIRECT_URL = 'document_list'
+LOGOUT_REDIRECT_URL = 'login'
+LOGIN_URL = 'login'
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Determine if we're running on Render
@@ -120,24 +125,16 @@ WSGI_APPLICATION = 'evercrow_project.wsgi.application'
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 # Database
-if ON_RENDER:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.environ.get('DB_NAME'),
-            'USER': os.environ.get('DB_USER'),
-            'PASSWORD': os.environ.get('DB_PASSWORD'),
-            'HOST': os.environ.get('DB_HOST'),
-            'PORT': os.environ.get('DB_PORT', '5432'),
-        }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+# For Render deployment, use a different database path
+if 'ON_RENDER' in os.environ:
+    DATABASES['default']['NAME'] = os.path.join('/tmp', 'db.sqlite3')
 
 
 # Password validation

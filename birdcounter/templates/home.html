@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Evercrow{% endblock %}
+
+{% block content %}
+    <h1>Welcome to Evercrow - PDF Bird Name Counter</h1>
+    
+    {% if user.is_authenticated %}
+        {% if documents %}
+            <h2>Your Documents</h2>
+            <ul>
+                {% for doc in documents %}
+                    <li><a href="{% url 'document_detail' doc.id %}">{{ doc.title }}</a></li>
+                {% endfor %}
+            </ul>
+        {% elif show_upload_prompt %}
+            <p>You haven't uploaded any documents yet.</p>
+            <a href="{% url 'upload_document' %}" class="btn">Upload Your First Document</a>
+        {% endif %}
+    {% else %}
+        <p>Evercrow helps you count bird names in your PDF documents.</p>
+        <a href="{% url 'signup' %}" class="btn">Sign Up</a>
+        <a href="{% url 'login' %}" class="btn btn-secondary">Log In</a>
+    {% endif %}
+{% endblock %}

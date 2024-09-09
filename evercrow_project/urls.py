@@ -16,14 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from birdcounter.views import count_bird_names
 from django.conf import settings
+from django.contrib.auth import views as auth_views
 from django.conf.urls.static import static
+from birdcounter import views
+
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', count_bird_names, name='count_bird_names'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
-
-
+    path('', views.home, name='home'),
+    path('signup/', views.signup, name='signup'),
+    path('upload/', views.upload_and_count_birds, name='upload_document'),
+    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path('documents/', views.document_list, name='document_list'),
+    path('document/<int:document_id>/', views.document_detail, name='document_detail'),
+]
